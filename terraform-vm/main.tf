@@ -84,8 +84,8 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
-  - cd /tmp/petclinic-setup/ansible-playbook && ansible-playbook docker-install.yaml
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /home/ubuntu/petclinic-setup
+
 
 EOF
 
@@ -104,6 +104,7 @@ resource "aws_instance" "nginx" {
   vpc_security_group_ids = [aws_security_group.petclinic.id]
   user_data              = <<EOF
 #cloud-config
+package_upgrade: true
 sources:
   ansible:
     source "ppa:ansible/ansible"
@@ -111,11 +112,8 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
-runcmd:
-  - cd /tmp/petclinic-setup/ansible-playbook && ansible-playbook docker-install.yaml
-
-
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /home/ubuntu/petclinic-setup
+  - cd /home/ubuntu/petclinic-setup/ansible && ansible-playbook docker-install.yaml
 EOF
 
   root_block_device {
