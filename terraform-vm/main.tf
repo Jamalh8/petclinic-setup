@@ -84,7 +84,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Jamalh8/petclinic-setup.git /home/ubuntu/petclinic-setup
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
 
 
 EOF
@@ -112,8 +112,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Jamalh8/petclinic-setup.git /home/ubuntu/petclinic-setup
-  - cd /home/ubuntu/petclinic-setup/ansible && ansible-playbook docker-install.yaml
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
 EOF
 
   root_block_device {
