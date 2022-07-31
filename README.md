@@ -19,5 +19,11 @@ Modified from Leon Robinson
 
 ## Step 3 - Install docker to both VM's.
 
-- cd /tmp/petclinic-set-up/ansible-playbook
+- cd /tmp/petclinic-setup/ansible/
 - ansible-playbook docker-install.yaml
+
+## Step 4 - If installing Jenkins then
+
+- cd /tmp/petclinic-setup/jenkins
+- sudo chmod +x install-jenkins.sh
+- ./install-jenkins.sh
