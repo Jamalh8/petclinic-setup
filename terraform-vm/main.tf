@@ -118,7 +118,7 @@ EOF
 }
 
 output "petclinic_IP" {
-  value = aws_instance.docker.public_ip
+  value = aws_instance.main.public_ip
 }
 
 output "Nginx_IP" {
