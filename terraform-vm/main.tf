@@ -117,10 +117,10 @@ EOF
   }
 }
 
-output "amazon_pubip" {
+output "petclinic_IP" {
   value = aws_instance.docker.public_ip
 }
 
-output "amazon_pubip" {
+output "Nginx_IP" {
   value = aws_instance.nginx.public_ip
 }
