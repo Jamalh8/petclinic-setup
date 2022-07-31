@@ -46,6 +46,7 @@ resource "aws_security_group" "petclinic" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
 #     ingress {
 #     description = "Front-end"
 #     from_port   = 8080
