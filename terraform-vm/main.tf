@@ -84,7 +84,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git /tmp/Minikube-Aws-Env
+  - git clone https://github.com/Jamalh8/petclinic-setup /tmp/petclinic-setup
 
 EOF
 
