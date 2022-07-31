@@ -11,13 +11,18 @@ variable "sshkeypairname" {
   description = "ssh keypair name in aws"
 }
 
+variable "small"  {
+  default = "t2.small"
+}
 
+variable "micro"  {
+  default = "t2.micro"
+}
 
 // Local Variables
 
 locals {
   imageid      = "ami-0bd2099338bc55e6d"
-  instanceType = "t2.small"
 }
 
 
@@ -67,7 +72,7 @@ resource "aws_security_group" "petclinic" {
 
 resource "aws_instance" "main" {
   ami                    = local.imageid
-  instance_type          = local.instanceType
+  instance_type          = var.small
   key_name               = var.sshkeypairname
   vpc_security_group_ids = [aws_security_group.petclinic.id]
   user_data              = <<EOF
@@ -80,6 +85,8 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
+  - cd /tmp/petclinic-setup/ansible-playbook 
+  - ansible-playbook docker-install.yaml
 
 EOF
 
@@ -93,7 +100,7 @@ EOF
 
 resource "aws_instance" "nginx" {
   ami                    = local.imageid
-  instance_type          = local.instanceType
+  instance_type          = var.micro
   key_name               = var.sshkeypairname
   vpc_security_group_ids = [aws_security_group.petclinic.id]
   user_data              = <<EOF
@@ -106,6 +113,8 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
+  - cd /tmp/petclinic-setup/ansible-playbook
+  - ansible-playbook docker-install.yaml
 
 EOF
 

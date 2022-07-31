@@ -3,14 +3,21 @@ set-up VM via terraform and ansible to install docker
  
 Modified from Leon Robinson
 
-## Step 1 - Deploy AWS instances
+# Clone repo and follow steps below.
+
+## Step 1 - Set your AWS key name.
+
+- go to terraform-vm/terraform.tfvars file.
+- change sshkeypair name to your own AWS keypair name.
+
+## Step 2 - Deploy AWS instances.
 
 - cd terraform-vm
 - terraform init
 - terraform plan 
 - terraform apply
 
-## Step 2 - Install docker to both VM's
+## Step 3 - Install docker to both VM's.
 
 - cd /tmp/petclinic-set-up/ansible-playbook
 - ansible-playbook docker-install.yaml
