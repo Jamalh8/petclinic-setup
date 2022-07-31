@@ -85,8 +85,7 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
-  - cd /tmp/petclinic-setup/ansible-playbook 
-  - ansible-playbook docker-install.yaml
+  - cd /tmp/petclinic-setup/ansible-playbook && ansible-playbook docker-install.yaml
 
 EOF
 
@@ -113,8 +112,8 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
-  - cd /tmp/petclinic-setup/ansible-playbook
-  - ansible-playbook docker-install.yaml
+  - cd /tmp/petclinic-setup/ansible-playbook && ansible-playbook docker-install.yaml
+
 
 EOF
 
