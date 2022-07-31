@@ -112,6 +112,7 @@ packages:
   - ansible
 runcmd:
   - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
+runcmd:
   - cd /tmp/petclinic-setup/ansible-playbook && ansible-playbook docker-install.yaml
 
 
