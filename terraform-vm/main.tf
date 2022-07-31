@@ -6,12 +6,6 @@ provider "aws" {
 
 // Input Variables
 
-variable "name-prefix" {
-  type        = string
-  default     = "Petclinic"
-  description = "prefix for instance name"
-}
-
 variable "sshkeypairname" {
   type        = string
   description = "ssh keypair name in aws"
@@ -52,25 +46,25 @@ resource "aws_security_group" "petclinic" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    ingress {
-    description = "Front-end"
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-    ingress {
-    description = "Back-End"
-    from_port   = 9966
-    to_port     = 9966
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+#     ingress {
+#     description = "Front-end"
+#     from_port   = 8080
+#     to_port     = 8080
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#     ingress {
+#     description = "Back-End"
+#     from_port   = 9966
+#     to_port     = 9966
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
 
 
 
-resource "aws_instance" "docker" {
+resource "aws_instance" "main" {
   ami                    = local.imageid
   instance_type          = local.instanceType
   key_name               = var.sshkeypairname
@@ -84,7 +78,7 @@ packages:
   - software-properties-common
   - ansible
 runcmd:
-  - git clone https://github.com/Jamalh8/petclinic-setup /tmp/petclinic-setup
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
 
 EOF
 
@@ -92,12 +86,40 @@ EOF
     volume_size = 20
   }
   tags = {
-    Name = "${var.name-prefix}-petclinic"
+    Name = "Petclinic-VM"
   }
 }
 
+resource "aws_instance" "nginx" {
+  ami                    = local.imageid
+  instance_type          = local.instanceType
+  key_name               = var.sshkeypairname
+  vpc_security_group_ids = [aws_security_group.petclinic.id]
+  user_data              = <<EOF
+#cloud-config
+sources:
+  ansible:
+    source "ppa:ansible/ansible"
+packages:
+  - software-properties-common
+  - ansible
+runcmd:
+  - git clone https://github.com/Jamalh8/petclinic-setup.git /tmp/petclinic-setup
 
+EOF
+
+  root_block_device {
+    volume_size = 8
+  }
+  tags = {
+    Name = "Petclinic-Nginx"
+  }
+}
 
 output "amazon_pubip" {
   value = aws_instance.docker.public_ip
+}
+
+output "amazon_pubip" {
+  value = aws_instance.nginx.public_ip
 }
