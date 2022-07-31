@@ -1,7 +1,8 @@
 # petclinic-setup
-set-up VM via terraform and ansible to install docker
+Terraform to set up VM's
+Ansible to install docker to those VM's
  
-Modified from Leon Robinson
+Modified from Leon Robinson's repo (https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git)
 
 # Clone repo and follow steps below.
 
