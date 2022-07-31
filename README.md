@@ -1,10 +1,15 @@
 # petclinic-setup
-Terraform to set up VM's
-Ansible to install docker to those VM's
+- Terraform to set up VM's
+- Ansible to install docker to those VM's
+- Jenkins script if installing jenkins
  
 Modified from Leon Robinson's repo (https://github.com/Crush-Steelpunch/Minikube-Aws-Env.git)
 
-# Clone repo and follow steps below.
+## Current VM's that will be created
+
+- Dev-VM
+- App-VM
+- Nginx-VM
 
 ## Step 1 - Set your AWS key name.
 
